@@ -1,16 +1,15 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { PrismaModule } from './prisma/prisma.module'
 import { TasksModule } from './tasks/tasks.module'
-import { TasksPModule } from './tasksP/tasks.module'
+import { AuthModule } from './auth/auth.module'
+import { PrismaModule } from './prisma/prisma.module'
+import { TodosModule } from './todos/todos.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TasksModule,
-    TasksPModule,
-    PrismaModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -20,6 +19,9 @@ import { TasksPModule } from './tasksP/tasks.module'
       autoLoadEntities: true,
       synchronize: true,
     }),
+    AuthModule,
+    PrismaModule,
+    TodosModule,
   ],
 })
 export class AppModule {}

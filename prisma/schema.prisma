@@ -22,3 +22,12 @@ enum Status {
   IN_PROGRESS
   DONE
 }
+
+model User {
+  id                 String   @id @default(cuid())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  email              String   @unique
+  hash               String
+  hashedRefreshToken String?
+}
