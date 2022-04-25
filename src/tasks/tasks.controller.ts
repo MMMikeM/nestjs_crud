@@ -25,8 +25,6 @@ export class TasksController {
 
   @Get('/:id')
   getTaskById(@Param('id') id: string): Task {
-    console.log(id)
-    console.log(this.tasksService.getTaskById(id))
     return this.tasksService.getTaskById(id)
   }
 
