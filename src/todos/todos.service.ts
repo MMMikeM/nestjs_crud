@@ -5,29 +5,32 @@ import {
   taskUpdateInput,
 } from '@prisma/client/generator-build'
 import { CreateTodoDto, WhichTodoDto } from './dto'
+import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class TodosService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateTodoDto) {
-    return await this.prisma.task.create({ data })
+  async create(args: Prisma.taskCreateArgs) {
+    return await this.prisma.task.create(args)
   }
 
-  async findAll() {
+  async findAll(args: Prisma.taskFindManyArgs) {
+    args.take ??= 10
+    args.skip ??= 0
     return await this.prisma.task.findMany({})
   }
 
-  async findOne(where: taskWhereUniqueInput) {
-    return await this.prisma.task.findUnique({ where })
+  async findOne(args: Prisma.taskFindUniqueArgs) {
+    return await this.prisma.task.findUnique(args)
   }
 
-  async update(where: WhichTodoDto, data: taskUpdateInput) {
-    data.updatedAt = new Date()
-    return await this.prisma.task.update({ where, data })
+  async update(args: Prisma.taskUpdateArgs) {
+    args.data.updatedAt = new Date()
+    return await this.prisma.task.update(args)
   }
 
-  async remove(where: WhichTodoDto) {
-    return await this.prisma.task.delete({ where })
+  async remove(args: Prisma.taskDeleteArgs) {
+    return await this.prisma.task.delete(args)
   }
 }

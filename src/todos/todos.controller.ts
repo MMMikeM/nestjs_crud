@@ -17,7 +17,7 @@ export class TodosController {
 
   @Post()
   create(@Body() data: CreateTodoDto) {
-    return this.todosService.create(data)
+    return this.todosService.create({ data })
   }
 
   @Get()
@@ -27,16 +27,16 @@ export class TodosController {
 
   @Get(':id')
   findOne(@Param() where: FindTodoDTO) {
-    return this.todosService.findOne(where)
+    return this.todosService.findOne({ where })
   }
 
   @Patch(':id')
   update(@Param() where: WhichTodoDto, @Body() data: UpdateTodoDto) {
-    return this.todosService.update(where, data)
+    return this.todosService.update({ where, data })
   }
 
   @Delete(':id')
   remove(@Param() where: WhichTodoDto) {
-    return this.todosService.remove(where)
+    return this.todosService.remove({ where })
   }
 }

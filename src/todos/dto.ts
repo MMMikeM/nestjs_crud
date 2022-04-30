@@ -1,5 +1,5 @@
 import { Status } from '@prisma/client'
-import { IsEnum, isEnum, IsNotEmpty } from 'class-validator'
+import { IsEnum, IsNotEmpty } from 'class-validator'
 
 export class FindTodoDTO {
   @IsNotEmpty()
